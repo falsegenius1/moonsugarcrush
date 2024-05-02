@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Crush💗</title>
+    <style>
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+                Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        main {
+            min-height: 80vh;
+            padding: 4rem 2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #img {
+            width: 280px;
+            height: 180px;
+            object-fit: cover;
+            margin: 1rem;
+        }
+
+        .hits {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <img src="images/1.jpg" id="img">
+        <select>
+            <option value="144p">144p</option>
+            <option value="240p">240p</option>
+            <option value="360p">360p</option>
+            <option value="480p">480p</option>
+            <option value="720p">720p</option>
+            <option value="1080p">1080p</option>
+        </select>
+        <!-- <a class="hits" href="https://hits.sh/moonsugarcrush.netlify.app/"><img alt="Hits"
+                src="https://hits.sh/moonsugarcrush.netlify.app.svg?color=000000" /></a> -->
+                <a class="hits" href="https://hits.sh/hits.sh/"><img alt="Hits" src="https://hits.sh/hits.sh.svg"/></a>
+    </main>
+
+    <script>
+        const img = document.getElementById('img');
+        const select = document.querySelector('select');
+        const music = new Audio("music/sugar.mp3")
+
+        select.addEventListener('change', () => {
+            music.pause()
+            if (select.value === '144p') {
+                img.setAttribute("src", "images/1.jpg")
+            }
+            if (select.value === '240p') {
+                img.setAttribute("src", "images/2.jpg")
+            }
+            if (select.value === '360p') {
+                img.setAttribute("src", "images/3.jpg")
+            }
+            if (select.value === '480p') {
+                img.setAttribute("src", "images/4.jpg")
+            }
+            if (select.value === '720p') {
+                img.setAttribute("src", "images/5.jpg")
+            }
+            if (select.value === '1080p') {
+                img.setAttribute("src", "images/you.gif")
+                music.play()
+                music.addEventListener("ended", () => {
+                    music.play()
+                })
+            }
+        })
+    </script>
+</body>
+
+</html>
