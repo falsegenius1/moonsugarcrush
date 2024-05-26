@@ -1,6 +1,5 @@
 <!doctype html>
 <html>
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -54,34 +53,32 @@
             <option value="720p">720p</option>
             <option value="1080p">1080p</option>
         </select>
-        <a class="hits" href="https://hits.sh/moonsugarcrush.netlify.app/"><img alt="Hits"
-                src="https://hits.sh/moonsugarcrush.netlify.app.svg?color=000000" /></a>
-               
+        <div class="hits" id="hits"></div>
     </main>
-
     <script>
-        const img = document.getElementById('img');
-        const select = document.querySelector('select');
+        const img = document.getElementById("img");
+        const select = document.querySelector("select");
+        const hitsDiv = document.getElementById("hits")
         const music = new Audio("music/sugar.mp3")
 
-        select.addEventListener('change', () => {
+        select.addEventListener("change", () => {
             music.pause()
-            if (select.value === '144p') {
+            if (select.value === "144p") {
                 img.setAttribute("src", "images/1.jpg")
             }
-            if (select.value === '240p') {
+            if (select.value === "240p") {
                 img.setAttribute("src", "images/2.jpg")
             }
-            if (select.value === '360p') {
+            if (select.value === "360p") {
                 img.setAttribute("src", "images/3.jpg")
             }
-            if (select.value === '480p') {
+            if (select.value === "480p") {
                 img.setAttribute("src", "images/4.jpg")
             }
-            if (select.value === '720p') {
+            if (select.value === "720p") {
                 img.setAttribute("src", "images/5.jpg")
             }
-            if (select.value === '1080p') {
+            if (select.value === "1080p") {
                 img.setAttribute("src", "images/you.gif")
                 music.play()
                 music.addEventListener("ended", () => {
@@ -89,6 +86,19 @@
                 })
             }
         })
+
+        const showHitCount = () => {
+            const hitCounter = document.createElement('a');
+            const isProduction = window.location.hostname == 'moonsugarcrush.netlify.app'
+            hitCounter.href = 'https://hits.sh/hits.sh.preview';
+            hitCounter.innerHTML = '<img alt="Hits" src="https://hits.sh/hits.sh.preview?color=000000" />';
+            if (isProduction) {
+                hitCounter.href = 'https://hits.sh/moonsugarcrush.netlify.app/';
+                hitCounter.innerHTML = '<img alt="Hits" src="https://hits.sh/moonsugarcrush.netlify.app.svg?color=000000" />';
+            }
+            hitsDiv.appendChild(hitCounter);
+        }
+        showHitCount()
     </script>
 </body>
 
