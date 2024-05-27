@@ -1,3 +1,3 @@
 ## moonsugarcrush💗
 
-impress your crush in style!
+impress your crush
