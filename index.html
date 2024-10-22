@@ -1,105 +1,115 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>moonsugarcrush💗</title>
     <style>
-        html,
-        body {
-            padding: 0;
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-                Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-        }
+      html,
+      body {
+        padding: 0;
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+          Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+      }
 
-        * {
-            box-sizing: border-box;
-        }
+      * {
+        box-sizing: border-box;
+      }
 
-        main {
-            min-height: 80vh;
-            padding: 4rem 2rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
+      main {
+        min-height: 80vh;
+        padding: 4rem 2rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
 
-        #img {
-            width: 280px;
-            height: 180px;
-            object-fit: cover;
-            margin: 1rem;
-        }
+      #img {
+        width: 280px;
+        height: 180px;
+        object-fit: cover;
+        margin: 1rem;
+      }
 
-        .hits {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-        }
+      .hits {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <main>
-        <img src="images/1.jpg" id="img">
-        <select>
-            <option value="144p">144p</option>
-            <option value="240p">240p</option>
-            <option value="360p">360p</option>
-            <option value="480p">480p</option>
-            <option value="720p">720p</option>
-            <option value="1080p">1080p</option>
-        </select>
-        <div class="hits" id="hits"></div>
+      <img src="images/1.jpg" id="img" />
+      <select>
+        <option value="144p">144p</option>
+        <option value="240p">240p</option>
+        <option value="360p">360p</option>
+        <option value="480p">480p</option>
+        <option value="720p">720p</option>
+        <option value="1080p">1080p</option>
+      </select>
+      <div class="hits" id="hits"></div>
     </main>
     <script>
-        const img = document.getElementById("img");
-        const select = document.querySelector("select");
-        const hitsDiv = document.getElementById("hits")
-        const music = new Audio("music/sugar.mp3")
+      const img = document.getElementById("img");
+      const select = document.querySelector("select");
+      const hitsDiv = document.getElementById("hits");
+      const music = new Audio("music/sugar.mp3");
 
-        select.addEventListener("change", () => {
-            music.pause()
-            if (select.value === "144p") {
-                img.setAttribute("src", "images/1.jpg")
-            }
-            if (select.value === "240p") {
-                img.setAttribute("src", "images/2.jpg")
-            }
-            if (select.value === "360p") {
-                img.setAttribute("src", "images/3.jpg")
-            }
-            if (select.value === "480p") {
-                img.setAttribute("src", "images/4.jpg")
-            }
-            if (select.value === "720p") {
-                img.setAttribute("src", "images/5.jpg")
-            }
-            if (select.value === "1080p") {
-                img.setAttribute("src", "images/you.gif")
-                music.play()
-                music.addEventListener("ended", () => {
-                    music.play()
-                })
-            }
-        })
+      const imageSources = {
+        "144p": "images/1.jpg",
+        "240p": "images/2.jpg",
+        "360p": "images/3.jpg",
+        "480p": "images/4.jpg",
+        "720p": "images/5.jpg",
+        "1080p": "images/you.gif",
+      };
 
-        const showHitCount = () => {
-            const hitCounter = document.createElement('a');
-            const isProduction = window.location.hostname == 'moonsugarcrush.netlify.app'
-            hitCounter.href = 'https://hits.sh/hits.sh.preview';
-            hitCounter.innerHTML = '<img alt="Hits" src="https://hits.sh/hits.sh.preview?color=000000" />';
-            if (isProduction) {
-                hitCounter.href = 'https://hits.sh/moonsugarcrush.netlify.app/';
-                hitCounter.innerHTML = '<img alt="Hits" src="https://hits.sh/moonsugarcrush.netlify.app.svg?color=000000" />';
-            }
-            hitsDiv.appendChild(hitCounter);
+      const preloadImages = () => {
+        for (const src of Object.values(imageSources)) {
+          const img = new Image();
+          img.src = src;
         }
-        showHitCount()
-    </script>
-</body>
+      };
 
+      const preloadAudio = () => {
+        music.preload = "auto";
+      };
+
+      preloadImages();
+      preloadAudio();
+
+      select.addEventListener("change", () => {
+        music.pause();
+        img.src = imageSources[select.value];
+        if (select.value === "1080p") {
+          music.play();
+          music.addEventListener("ended", () => {
+            music.play();
+          });
+        }
+      });
+
+      const showHitCount = () => {
+        const hitCounter = document.createElement("a");
+        const isProduction =
+          window.location.hostname == "moonsugarcrush.netlify.app";
+        hitCounter.href = "https://hits.sh/hits.sh.preview";
+        hitCounter.innerHTML =
+          '<img alt="Hits" src="https://hits.sh/hits.sh.preview?color=000000" />';
+        if (isProduction) {
+          hitCounter.href = "https://hits.sh/moonsugarcrush.netlify.app/";
+          hitCounter.innerHTML =
+            '<img alt="Hits" src="https://hits.sh/moonsugarcrush.netlify.app.svg?color=000000" />';
+        }
+        hitsDiv.appendChild(hitCounter);
+      };
+      showHitCount();
+    </script>
+  </body>
 </html>
